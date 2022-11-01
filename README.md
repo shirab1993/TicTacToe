@@ -7,7 +7,7 @@ You can play against another player or you can play against the computer.
 
 If you choose to play against the computer.
 
-The game will start with a coin toss to decide who will play first.
+The game will start with a coin toss to decide who play first.
 
 The computer is competitive and challenging - so try to beat it!
 
