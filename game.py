@@ -55,18 +55,19 @@ class Game:
         :return:print table score
         '''
 
-        winner = self.players[int(self.turn)]
+        winner = int(self.turn)
         if self.board.is_draw():
             self.computer_score += 1
             self.player_score += 1
         elif winner == 0:
-            self.player_score += 2
+            self.computer_score += 2
         else:
             self.player_score += 2
 
         print(f'Table score--> computer score: {self.computer_score}| player score: {self.player_score}')
 
     def play(self):
+        print('For place mark in board choose :\n0|1|2\n-----\n3|4|5\n-----\n6|7|8\n')
 
         while True:
             current_player = self.players[int(self.turn)]

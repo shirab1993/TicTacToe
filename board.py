@@ -1,5 +1,6 @@
 class Board:
-    board = [' '] * 9
+    def __init__(self):
+        self.board = [' '] * 9
 
     def print_board(self):
         print(self.board[0] + '|' + self.board[1] + '|' + self.board[2])
