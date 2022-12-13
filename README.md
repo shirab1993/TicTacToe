@@ -1,7 +1,9 @@
 # Tictactoe
 # Tic Tac Toe game
 
-This repository contains a Python Tic Tac Toe game with AI.
+This repository contains a Python Tic Tac Toe game.
+
+using Minimax with Alpha/Beta pruning AI 
 
 You can play against another player or you can play against the computer.
 
