@@ -43,6 +43,7 @@ class Game:
             self.set_turn(res)
             self.set_players(Computer('computer', 'o', 'x'), Player(p1, 'x', 'o'))
             self.play()
+            self.update_print_score_table()
             again = str(input('Do you want to play again? type yes or no\n'))
             if again == 'no':
                 play_again = False
@@ -51,7 +52,7 @@ class Game:
 
     def update_print_score_table(self):
         '''
-        The winner is The winner is the one whose last turn is his Therefore if there is no tie we will update the winner
+        The winner is the one whose last turn is his Therefore if there is no tie we will update the winner
         :return:print table score
         '''
 
@@ -68,24 +69,20 @@ class Game:
 
     def play(self):
         print('For place mark in board choose :\n0|1|2\n-----\n3|4|5\n-----\n6|7|8\n')
-
         while True:
             current_player = self.players[int(self.turn)]
             self.board.print_board()
             move = current_player.make_move(self.board)
             self.board.place_mark(current_player.marker, move)
-            is_winning = self.board.is_winner(current_player.marker)
 
             if self.board.is_draw():
                 print(f"It's a draw")
                 self.board.print_board()
-                self.update_print_score_table()
                 break
 
-            elif is_winning:
+            elif self.board.is_winner(current_player.marker):
                 print(f'Congratulations {current_player.name} you win !!')
                 self.board.print_board()
-                self.update_print_score_table()
                 break
             else:
                 self.turn = not self.turn

@@ -1,6 +1,9 @@
 import random
 import math
 
+MAX = math.inf
+MIN = -math.inf
+
 
 class Player:
     def __init__(self, name, marker, opponent_marker):
@@ -22,27 +25,27 @@ class Player:
 
 
 class Computer(Player):
-
     def make_move(self, board):
         if board.is_empty():
             first_comp_move = random.randint(0,8)
             return first_comp_move
+
         else:
 
             best_score = -math.inf
             best_move = math.inf
-
             for i in range(9):
                 if board.is_legal_place(i):
                     board.place_mark(self.marker, i)
-                    score = self.minimax(board, 0, False)
+                    score = self.minimax(board, 0, False,MIN,MAX)
                     board.board[i] = ' '
                     if score > best_score:
                         best_score = score
                         best_move = i
             return best_move
 
-    def minimax(self, board, depth, is_maximizing):
+    def minimax(self, board, depth, is_maximizing,alpha, beta):
+
         if board.is_winner(self.marker):
             return 1
         elif board.is_winner(self.opponent_marker):
@@ -56,9 +59,13 @@ class Computer(Player):
             for i in range(9):
                 if board.is_legal_place(i):
                     board.place_mark(self.marker, i)
-                    score = self.minimax(board, depth + 1, False)
+                    score = self.minimax(board, depth + 1, False,alpha,beta)
                     board.board[i] = ' '
                     best_score = max(score,best_score)
+                    alpha = max(alpha,best_score)
+                #alpha beta pruning
+                if beta <= alpha:
+                    break
 
             return best_score
 
@@ -68,9 +75,12 @@ class Computer(Player):
             for i in range(9):
                 if board.is_legal_place(i):
                     board.place_mark(self.opponent_marker, i)
-                    score = self.minimax(board, depth + 1, True)
+                    score = self.minimax(board, depth + 1, True,alpha,beta)
                     board.board[i] = ' '
                     best_score = min(score, best_score)
+                    beta = min(beta,best_score)
+                if beta <= alpha:
+                    break
 
             return best_score
 
